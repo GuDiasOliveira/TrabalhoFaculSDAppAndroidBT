@@ -2,13 +2,16 @@ package br.edu.utfpr.aplicacaobluetoothsd;
 
 import android.app.ListActivity;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 
-public class MainActivity extends ListActivity {
+public class MainActivity extends ListActivity implements AdapterView.OnItemClickListener {
 
     private static final int REQUEST_ENABLE_BLUETOOTH = 1;
 
@@ -51,5 +54,13 @@ public class MainActivity extends ListActivity {
     protected void onDestroy() {
         super.onDestroy();
         listAdapter.unregisterFoundDeviceListener();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent i = new Intent(this, ChatActivity.class);
+        BluetoothDevice chosenDevice = listAdapter.getItem(position);
+        i.putExtra(ChatActivity.EXTRA_BLUETOOTH_DEVICE, new Serializer(chosenDevice));
+        startActivity(i);
     }
 }
