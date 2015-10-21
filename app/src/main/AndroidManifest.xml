@@ -23,6 +23,10 @@
             android:name=".ChatActivity"
             android:label="@string/title_activity_chat" >
         </activity>
+        <activity
+            android:name=".SensorActivity"
+            android:label="@string/title_activity_sensor" >
+        </activity>
     </application>
 
 </manifest>
