@@ -6,4 +6,7 @@
     <string name="title_activity_chat">Chat</string>
     <string name="button_send">Enviar</string>
     <string name="message_label_person_you">Você: </string>
+
+    <string name="title_activity_sensor">SensorActivity</string>
+    <string name="list_test">Lendo o Sensor</string>
 </resources>

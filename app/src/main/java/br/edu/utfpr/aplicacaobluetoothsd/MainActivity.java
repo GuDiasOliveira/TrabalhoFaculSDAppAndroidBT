@@ -6,6 +6,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +26,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemClic
 
         listAdapter = new BluetoothDevicesListAdapter(this);
         getListView().setAdapter(listAdapter);
+        getListView().setOnItemClickListener(this);
 
         // Solicitando começar a procurar dispositivos ao redor
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -36,6 +38,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemClic
             Intent intentRequestEnableBluetooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(intentRequestEnableBluetooth, REQUEST_ENABLE_BLUETOOTH);
         }
+        Log.d("bb", "App Created");
     }
 
 
@@ -58,9 +61,11 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemClic
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent i = new Intent(this, ChatActivity.class);
+        Log.d("bb", "item clicado");
+        Intent i = new Intent(this, SensorActivity.class);
         BluetoothDevice chosenDevice = listAdapter.getItem(position);
-        i.putExtra(ChatActivity.EXTRA_BLUETOOTH_DEVICE, new Serializer(chosenDevice));
+        Log.d("bb", "dispositivo: " + chosenDevice.toString());
+        i.putExtra(SensorActivity.EXTRA_BLUETOOTH_DEVICE, chosenDevice.getAddress());
         startActivity(i);
     }
 }
