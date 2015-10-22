@@ -32,9 +32,10 @@ public class ThreadBluetooth extends Thread {
                 String stringLevel = "" + activity.getLevel();
                 Log.i("bb", "level: " + stringLevel);
                 msg.write(stringLevel.getBytes());
+                ThreadBluetooth.sleep(1000);
                 socket.close();
                 Log.i("bb", "depois");
-                ThreadBluetooth.sleep(10000);
+
             } catch (IOException e) {
                 Log.i("bb", "dispositivo nao encontrado");
             } catch (InterruptedException e) {
